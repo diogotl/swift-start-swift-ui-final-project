@@ -1,0 +1,68 @@
+# .gitignore para projeto Xcode
+# Mantém o repositório limpo de arquivos específicos da máquina/desenvolvedor
+
+# macOS
+.DS_Store
+
+# Xcode build / derived files
+build/
+DerivedData/
+*.moved-aside
+
+# Xcode workspace/User data (evitar commitar preferências locais)
+# -> Não ignorar xcshareddata/xcschemes (schemes partilhados), apenas dados de usuário
+xcuserdata/
+*.xcuserdatad
+*.xcdebugger
+*.xcbkptlist
+*.xcuserstate
+
+# Xcode project user files
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# Swift Package Manager
+.build/
+.swiftpm
+Package.resolved
+
+# CocoaPods
+Pods/
+# Carthage
+Carthage/Build/
+Carthage/Checkouts/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+
+# IDEs / editors
+.idea/
+.vscode/
+
+# Secrets / environment
+.env
+.env.*.local
+*.key
+*.mobileprovision
+
+# Archive / temporary outputs
+*.xcarchive
+*.ipa
+
+# Swift generated files
+*.swiftsourceinfo
+
+# Optional: Xcode's generated asset symbol extensions (if you don't want them tracked)
+# .swift files generated from asset catalogs:
+*.colorset.swift
+*.imageset.swift
+
+# Logs
+*.log
+
+# Keep this file tracked - customize as needed for your team.
