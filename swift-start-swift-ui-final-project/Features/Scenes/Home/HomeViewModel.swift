@@ -5,9 +5,9 @@
 //  Created by Diogo on 27/02/2026.
 //
 
-import Combine
 import Foundation
 import SwiftUI
+import Combine
 
 @MainActor
 final class HomeViewModel: ObservableObject {
@@ -15,6 +15,7 @@ final class HomeViewModel: ObservableObject {
     @Published var items: [Artwork] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var searchByTitleQuery: String = ""
 
     private let service: HomeViewService
 
@@ -27,8 +28,20 @@ final class HomeViewModel: ObservableObject {
         errorMessage = nil
 
         do {
-            let response = try await service.fetchItems()
-            items = response.data
+            items = try await service.fetchItems()
+        } catch {
+            errorMessage = "Failed to load items"
+        }
+
+        isLoading = false
+    }
+
+    func searchItems() async {
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            items = try await service.fetchItems(searchQuery: searchByTitleQuery)
         } catch {
             errorMessage = "Failed to load items"
         }

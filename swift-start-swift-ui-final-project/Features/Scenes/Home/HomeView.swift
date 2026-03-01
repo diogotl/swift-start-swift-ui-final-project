@@ -16,7 +16,7 @@ struct HomeView: View {
 
     var body: some View {
         ZStack {
-            Colors.n950
+            Colors.neutral50
                 .ignoresSafeArea()
             NavigationStack {
                 Group {
@@ -25,11 +25,26 @@ struct HomeView: View {
                     } else if let error = viewModel.errorMessage {
                         Text(error)
                     } else {
-                        List(viewModel.items) { item in
-                            NavigationLink(item.title) {
-                                //ItemDetailView(item: item)
+                        VStack {
+                            HStack {
+                                TextField(
+                                    "Search by artworks...",
+                                    text: $viewModel.searchByTitleQuery
+                                )
+
+                                Button("Search") {
+                                    Task {
+                                        await viewModel.searchItems()
+                                    }
+                                }
+//                                .disabled(viewModel.searchByTitleQuery.isEmpty)
                             }
-                            Text(item.title)
+
+                            List(viewModel.items) { item in
+                                NavigationLink(destination: createDetailView(for: item.id)) {
+                                    Text(item.title)
+                                }
+                            }
                         }
                     }
                 }
@@ -40,5 +55,14 @@ struct HomeView: View {
             }
         }
 
+    }
+
+    //TODO transform this method into a factory
+    private func createDetailView(for artworkId: Int) -> ArtworkDetailView {
+        let baseUrl = ProcessInfo.processInfo.environment["BASE_URL"] ?? ""
+        let apiClient = APIClient(baseURL: baseUrl)
+        let service = ArtworkDetailService(apiClient: apiClient)
+        let viewModel = ArtworkDetailViewModel(service: service, artworkId: artworkId)
+        return ArtworkDetailView(viewModel: viewModel)
     }
 }

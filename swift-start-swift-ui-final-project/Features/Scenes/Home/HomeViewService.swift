@@ -15,11 +15,22 @@ final class HomeViewService {
         self.apiClient = apiClient
     }
 
-    func fetchItems() async throws -> ArtworkResponse {
-        let endpoint = Endpoint(path: "artworks", queryItems: nil)
-        
+    func fetchItems(searchQuery: String = "") async throws -> [Artwork] {
+        let path: String
+        var queryItems: [URLQueryItem]? = nil
+
+        if !searchQuery.isEmpty {
+            path = "artworks/search"
+            queryItems = [URLQueryItem(name: "q", value: searchQuery)]
+        } else {
+            path = "artworks"
+        }
+
+        let endpoint = Endpoint(path: path, queryItems: queryItems)
+
         print("endpoint", endpoint)
-        
-        return try await apiClient.request(endpoint)
+
+        let response: ArtworkListResponse = try await apiClient.request(endpoint)
+        return response.data.toDomain()
     }
 }
