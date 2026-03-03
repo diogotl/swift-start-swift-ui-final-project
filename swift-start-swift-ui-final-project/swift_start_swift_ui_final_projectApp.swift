@@ -11,11 +11,11 @@ import SwiftUI
 struct swift_start_swift_ui_final_projectApp: App {
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            RootView()
         }
     }
 }
 
 #Preview {
-    MainTabView()
+    RootView()
 }
