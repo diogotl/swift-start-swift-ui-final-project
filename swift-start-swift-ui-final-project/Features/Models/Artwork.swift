@@ -13,6 +13,8 @@ struct Artwork: Identifiable {
     let artistTitle: String?
     let dateDisplay: String?
     let imageID: String?
+    
+    let artistIDs: [Int]?
 
     // artwork detail
     let provenanceText: String?
@@ -22,7 +24,7 @@ struct Artwork: Identifiable {
     let description: String?
 
     // home init
-    init(id: Int, title: String, artistTitle: String?, dateDisplay: String?, imageID: String?) {
+    init(id: Int, title: String, artistTitle: String?, dateDisplay: String?, imageID: String?, artistIDs: [Int]? = nil) {
         self.id = id
         self.title = title
         self.artistTitle = artistTitle
@@ -33,6 +35,7 @@ struct Artwork: Identifiable {
         self.mediumDisplay = nil
         self.placeOfOrigin = nil
         self.description = nil
+        self.artistIDs = artistIDs
     }
 
     // details init
@@ -46,7 +49,11 @@ struct Artwork: Identifiable {
         dimensions: String?,
         mediumDisplay: String?,
         placeOfOrigin: String?,
-        description: String?
+        description: String?,
+        artistIDs: [Int]? = nil
+        
+
+        
     ) {
         self.id = id
         self.title = title
@@ -58,6 +65,7 @@ struct Artwork: Identifiable {
         self.mediumDisplay = mediumDisplay
         self.placeOfOrigin = placeOfOrigin
         self.description = description
+        self.artistIDs = artistIDs
     }
 }
 
@@ -88,6 +96,7 @@ struct ArtworkDetailDTO: Decodable {
     let mediumDisplay: String?
     let placeOfOrigin: String?
     let description: String?
+    let artistIDs: [Int]?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -100,6 +109,9 @@ struct ArtworkDetailDTO: Decodable {
         case mediumDisplay = "medium_display"
         case placeOfOrigin = "place_of_origin"
         case description
+        case artistIDs = "artist_ids"
+
+
     }
 }
 
@@ -137,7 +149,8 @@ extension ArtworkDetailDTO {
             dimensions: dimensions,
             mediumDisplay: mediumDisplay,
             placeOfOrigin: placeOfOrigin,
-            description: description
+            description: description,
+            artistIDs: artistIDs
         )
     }
 }
