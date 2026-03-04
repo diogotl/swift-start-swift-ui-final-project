@@ -11,6 +11,18 @@ import SwiftUI
 
 struct FavoriteView: View {
     var body: some View {
-        Text("favorites")
+        ContentUnavailableView {
+            Label("No favorites yet", systemImage: "heart")
+        } description: {
+            Text(
+                
+                "Start exploring the collection and save artworks you love by tapping the heart icon on any artwork."
+            )
+        } actions: {
+            NavigationLink("Explore the collection") {
+                //HomeView()
+            }
+            .buttonStyle(.borderedProminent)
+        }
     }
 }
