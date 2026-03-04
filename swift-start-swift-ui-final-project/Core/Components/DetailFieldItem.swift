@@ -12,9 +12,16 @@ struct DetailFieldItem: View {
     let value: String
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading, spacing: Spacing.xsSmall) {
             Text(title)
+                .font(Typography.bodyXs)
+                .foregroundStyle(Colors.neutral500)
+                .textCase(.uppercase)
+                .tracking(0.5)
+
             Text(value)
+                .font(Typography.bodySm)
+                .foregroundStyle(Colors.neutral900)
         }
     }
 }
