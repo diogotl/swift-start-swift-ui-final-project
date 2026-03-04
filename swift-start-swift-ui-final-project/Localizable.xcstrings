@@ -1,0 +1,75 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Artist" : {
+
+    },
+    "Artworks by %@" : {
+
+    },
+    "Biography" : {
+
+    },
+    "Collection" : {
+
+    },
+    "erro...." : {
+
+    },
+    "error" : {
+
+    },
+    "Explore the collection" : {
+
+    },
+    "Favorites" : {
+
+    },
+    "Fechar..." : {
+
+    },
+    "Image unavailable" : {
+
+    },
+    "logo" : {
+
+    },
+    "no data" : {
+
+    },
+    "No favorites yet" : {
+
+    },
+    "no image" : {
+
+    },
+    "Read more..." : {
+
+    },
+    "Search" : {
+
+    },
+    "Search by artworks..." : {
+
+    },
+    "Sem biografia" : {
+
+    },
+    "Share" : {
+
+    },
+    "Start exploring the collection and save artworks you love by tapping the heart icon on any artwork." : {
+
+    },
+    "Try Again" : {
+
+    },
+    "Unable to Load Artist" : {
+
+    },
+    "View Artist" : {
+
+    }
+  },
+  "version" : "1.1"
+}
