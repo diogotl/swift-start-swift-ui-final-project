@@ -12,7 +12,7 @@ struct Artist: Identifiable, Equatable, Hashable, Sendable {
     let isArtist: Bool
     let birthYear: Int?
     let deathYear: Int?
-    let bio: String
+    let bio: String?
 
     func formatLifespan(birthYear: Int?, deathYear: Int?) -> String? {
         switch (birthYear, deathYear) {
@@ -38,7 +38,7 @@ extension ArtistDetailDTO {
             isArtist: isArtist ?? true,
             birthYear: birthDate,
             deathYear: deathDate,
-            bio: description ?? "sem desc"
+            bio: description,
         )
     }
 }
