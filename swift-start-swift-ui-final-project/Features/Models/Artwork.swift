@@ -13,7 +13,7 @@ struct Artwork: Identifiable {
     let artistTitle: String?
     let dateDisplay: String?
     let imageID: String?
-    
+
     let artistIDs: [Int]?
 
     // artwork detail
@@ -22,9 +22,17 @@ struct Artwork: Identifiable {
     let mediumDisplay: String?
     let placeOfOrigin: String?
     let description: String?
+    let artworkTypeTitle: String?
+    let departmentTitle: String?
+    let styleTitle: String?
+    let classificationTitle: String?
+    let isPublicDomain: Bool?
 
     // home init
-    init(id: Int, title: String, artistTitle: String?, dateDisplay: String?, imageID: String?, artistIDs: [Int]? = nil) {
+    init(
+        id: Int, title: String, artistTitle: String?, dateDisplay: String?, imageID: String?,
+        artistIDs: [Int]? = nil
+    ) {
         self.id = id
         self.title = title
         self.artistTitle = artistTitle
@@ -36,6 +44,11 @@ struct Artwork: Identifiable {
         self.placeOfOrigin = nil
         self.description = nil
         self.artistIDs = artistIDs
+        self.artworkTypeTitle = nil
+        self.departmentTitle = nil
+        self.styleTitle = nil
+        self.classificationTitle = nil
+        self.isPublicDomain = nil
     }
 
     // details init
@@ -50,10 +63,12 @@ struct Artwork: Identifiable {
         mediumDisplay: String?,
         placeOfOrigin: String?,
         description: String?,
-        artistIDs: [Int]? = nil
-        
-
-        
+        artistIDs: [Int]? = nil,
+        artworkTypeTitle: String? = nil,
+        departmentTitle: String? = nil,
+        styleTitle: String? = nil,
+        classificationTitle: String? = nil,
+        isPublicDomain: Bool? = nil
     ) {
         self.id = id
         self.title = title
@@ -66,6 +81,11 @@ struct Artwork: Identifiable {
         self.placeOfOrigin = placeOfOrigin
         self.description = description
         self.artistIDs = artistIDs
+        self.artworkTypeTitle = artworkTypeTitle
+        self.departmentTitle = departmentTitle
+        self.styleTitle = styleTitle
+        self.classificationTitle = classificationTitle
+        self.isPublicDomain = isPublicDomain
     }
 }
 
@@ -97,6 +117,11 @@ struct ArtworkDetailDTO: Decodable {
     let placeOfOrigin: String?
     let description: String?
     let artistIDs: [Int]?
+    let artworkTypeTitle: String?
+    let departmentTitle: String?
+    let styleTitle: String?
+    let classificationTitle: String?
+    let isPublicDomain: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -110,8 +135,11 @@ struct ArtworkDetailDTO: Decodable {
         case placeOfOrigin = "place_of_origin"
         case description
         case artistIDs = "artist_ids"
-
-
+        case artworkTypeTitle = "artwork_type_title"
+        case departmentTitle = "department_title"
+        case styleTitle = "style_title"
+        case classificationTitle = "classification_title"
+        case isPublicDomain = "is_public_domain"
     }
 }
 
@@ -150,7 +178,12 @@ extension ArtworkDetailDTO {
             mediumDisplay: mediumDisplay,
             placeOfOrigin: placeOfOrigin,
             description: description,
-            artistIDs: artistIDs
+            artistIDs: artistIDs,
+            artworkTypeTitle: artworkTypeTitle,
+            departmentTitle: departmentTitle,
+            styleTitle: styleTitle,
+            classificationTitle: classificationTitle,
+            isPublicDomain: isPublicDomain
         )
     }
 }

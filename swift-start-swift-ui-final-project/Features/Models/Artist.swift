@@ -13,6 +13,20 @@ struct Artist: Identifiable, Equatable, Hashable, Sendable {
     let birthYear: Int?
     let deathYear: Int?
     let bio: String
+
+    func formatLifespan(birthYear: Int?, deathYear: Int?) -> String? {
+        switch (birthYear, deathYear) {
+        case (.some(let birth), .some(let death)):
+            return "\(birth) - \(death)"
+        case (.some(let birth), .none):
+            return "Born \(birth)"
+        case (.none, .some(let death)):
+            return "Died \(death)"
+        case (.none, .none):
+            return nil
+        }
+    }
+
 }
 
 extension ArtistDetailDTO {
