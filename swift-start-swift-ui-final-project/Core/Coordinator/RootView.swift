@@ -39,16 +39,16 @@ struct RootView: View {
     private func destinationView(for route: Route) -> some View {
         switch route {
         case .home:
-            factory.makeHomeView()
+            factory.homeViewFactory.makeHomeView()
 
         case .favorites:
-            factory.makeFavoriteView()
+            factory.favoriteViewFactory.makeFavoriteView()
 
         case .artworkDetail(let artworkId):
-            factory.makeArtworkDetailView(artworkId: artworkId)
+            factory.artworkDetailViewFactory.makeArtworkDetailView(artworkId: artworkId)
 
         case .artistDetail(let artistId):
-            factory.makeArtistDetailView(artistId: artistId)
+            factory.artistDetailViewFactory.makeArtistDetailView(artistId: artistId)
         }
     }
 }

@@ -8,30 +8,25 @@
 import SwiftUI
 
 struct MainTabView: View {
-    let homeViewModel: HomeViewModel
+    private let viewFactory: ViewFactory
 
-    //needs reworking
-    init() {
-        let baseUrl = ProcessInfo.processInfo.environment["BASE_URL"] ?? ""
-        print(baseUrl)
-        let apiClient = APIClient(baseURL: baseUrl)
-        let homeViewService = HomeViewService(apiClient: apiClient)
-        self.homeViewModel = HomeViewModel(service: homeViewService)
+    init(viewFactory: ViewFactory) {
+        self.viewFactory = viewFactory
     }
 
     var body: some View {
         HStack {
             TabView {
-                HomeView(viewModel: homeViewModel)
+                viewFactory.homeViewFactory.makeHomeView()
                     .tabItem {
-                        Label("", systemImage: "house.fill")
+                        Label("Collection", systemImage: "square.grid.2x2.fill")
                     }
-                HomeView(viewModel: homeViewModel)
+                viewFactory.favoriteViewFactory.makeFavoriteView()
                     .tabItem {
-                        Label("", systemImage: "house.fill")
+                        Label("Favorites", systemImage: "star.fill")
                     }
             }
-            .accentColor(Colors.emerald100)
+            .accentColor(Colors.brown500)
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
 

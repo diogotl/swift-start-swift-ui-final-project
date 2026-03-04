@@ -9,10 +9,16 @@ import SwiftUI
 
 @MainActor
 final class ViewFactory {
-    private let apiClient: APIClient
+    let homeViewFactory: HomeViewFactory
+    let favoriteViewFactory: FavoriteViewFactory
+    let artworkDetailViewFactory: ArtworkDetailViewFactory
+    let artistDetailViewFactory: ArtistDetailViewFactory
 
     init(apiClient: APIClient) {
-        self.apiClient = apiClient
+        self.homeViewFactory = HomeViewFactory(apiClient: apiClient)
+        self.favoriteViewFactory = FavoriteViewFactory()
+        self.artworkDetailViewFactory = ArtworkDetailViewFactory(apiClient: apiClient)
+        self.artistDetailViewFactory = ArtistDetailViewFactory(apiClient: apiClient)
     }
 
     static func makeDefault() -> ViewFactory {
@@ -23,34 +29,6 @@ final class ViewFactory {
     }
 
     func makeMainTabView() -> MainTabView {
-        return MainTabView()
-    }
-
-    func makeHomeView() -> HomeView {
-        let service = HomeViewService(apiClient: apiClient)
-        let viewModel = HomeViewModel(service: service)
-        return HomeView(viewModel: viewModel)
-    }
-
-    func makeFavoriteView() -> FavoriteView {
-        return FavoriteView()
-    }
-
-    func makeArtworkDetailView(artworkId: Int) -> ArtworkDetailView {
-        let service = ArtworkDetailService(apiClient: apiClient)
-        let viewModel = ArtworkDetailViewModel(
-            service: service,
-            artworkId: artworkId
-        )
-        return ArtworkDetailView(viewModel: viewModel)
-    }
-
-    func makeArtistDetailView(artistId: Int) -> ArtistDetailView {
-        let service = ArtistDetailViewService(apiClient: apiClient)
-        let viewModel = ArtistDetailViewModel(
-            service: service,
-            artistId: artistId
-        )
-        return ArtistDetailView(viewModel: viewModel)
+        return MainTabView(viewFactory: self)
     }
 }
