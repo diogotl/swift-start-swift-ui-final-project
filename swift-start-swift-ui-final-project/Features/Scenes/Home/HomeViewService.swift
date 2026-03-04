@@ -26,6 +26,15 @@ final class HomeViewService {
             path = "artworks"
         }
 
+        let fieldsParam = URLQueryItem(
+            name: "fields", value: "id,title,artist_title,date_display,image_id,thumbnail")
+
+        if queryItems != nil {
+            queryItems?.append(fieldsParam)
+        } else {
+            queryItems = [fieldsParam]
+        }
+
         let endpoint = Endpoint(path: path, queryItems: queryItems)
 
         print("endpoint", endpoint)

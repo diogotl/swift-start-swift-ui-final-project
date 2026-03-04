@@ -5,15 +5,16 @@
 //  Created by Diogo on 27/02/2026.
 //
 
+import Combine
 import Foundation
 import SwiftUI
-import Combine
 
 @MainActor
 final class HomeViewModel: ObservableObject {
 
     @Published var items: [Artwork] = []
     @Published var isLoading = false
+    @Published var isLoadingList = false
     @Published var errorMessage: String?
     @Published var searchByTitleQuery: String = ""
 
@@ -37,7 +38,7 @@ final class HomeViewModel: ObservableObject {
     }
 
     func searchItems() async {
-        isLoading = true
+        isLoadingList = true
         errorMessage = nil
 
         do {
@@ -46,6 +47,6 @@ final class HomeViewModel: ObservableObject {
             errorMessage = "Failed to load items"
         }
 
-        isLoading = false
+        isLoadingList = false
     }
 }
