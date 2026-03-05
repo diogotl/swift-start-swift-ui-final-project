@@ -12,37 +12,42 @@ struct ArtworkCardView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            LazyImage(imageID: artwork.imageID)
-                .frame(height: 320)
-                .frame(maxWidth: .infinity)
-                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+            ZStack(alignment: .topLeading) {
+                LazyImage(imageID: artwork.imageID)
+                    .frame(height: 320)
+                    .frame(maxWidth: .infinity)
 
-            VStack(alignment: .leading, spacing: Spacing.xsSmall) {
-                HStack(alignment: .firstTextBaseline) {
-                    Text(artwork.title)
-                        .font(Typography.headingMd)
-                        .foregroundStyle(Colors.neutral900)
-                        .lineLimit(2)
-                        .multilineTextAlignment(.leading)
-
-                    Spacer(minLength: 8)
-
-                    Text(artwork.artworkTypeTitle ?? "Artwork")
-                        .font(.system(size: 12, weight: .semibold))
-                        .foregroundStyle(Colors.neutral700)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 6)
-                        .background(Colors.neutral100)
-                        .clipShape(Capsule())
-                        .overlay(
-                            Capsule().stroke(Colors.neutral200, lineWidth: 1)
-                        )
+                Group {
+                    if let title = artwork.artworkTypeTitle {
+                        Badge(text: title, variant: .secondary)
+                            .padding()
+                    }
                 }
 
-                Text(artwork.artistTitle ?? "Artist")
-                    .font(Typography.bodySm)
-                    .foregroundStyle(Colors.neutral500)
-                    .lineLimit(3)
+            }
+            .clipShape(
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+            )
+
+            VStack(alignment: .leading, spacing: Spacing.xsSmall) {
+                Text(artwork.title)
+                    .font(Typography.headingMd)
+                    .foregroundStyle(Colors.neutral900)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+
+                HStack(alignment: .firstTextBaseline) {
+                    Text(artwork.dateDisplay ?? "-")
+                        .font(Typography.bodySm)
+                        .foregroundStyle(Colors.neutral600)
+                        .lineLimit(1)
+                    Spacer(minLength: Spacing.medium)
+
+                    Text(artwork.placeOfOrigin ?? "Portugal")
+                        .font(Typography.bodySm)
+                        .foregroundStyle(Colors.neutral600)
+                        .lineLimit(1)
+                }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 16)
