@@ -9,8 +9,20 @@ import SwiftUI
 
 @MainActor
 final class FavoriteViewFactory {
+    private let apiClient: APIClient
+    private let favoritesStore: FavoritesStore
+
+    init(apiClient: APIClient, favoritesStore: FavoritesStore) {
+        self.apiClient = apiClient
+        self.favoritesStore = favoritesStore
+    }
 
     func makeFavoriteView() -> FavoriteView {
-        return FavoriteView()
+        let service = FavoriteViewService(apiClient: apiClient)
+        let viewModel = FavoriteViewModel(
+            service: service,
+            favoritesStore: favoritesStore
+        )
+        return FavoriteView(viewModel: viewModel)
     }
 }
