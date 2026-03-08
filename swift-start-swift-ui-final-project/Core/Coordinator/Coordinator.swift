@@ -10,7 +10,7 @@ import SwiftUI
 
 @MainActor
 final class Coordinator: ObservableObject {
-    
+
     @Published var path = NavigationPath()
 
     func push(_ route: Route) {
@@ -37,13 +37,5 @@ final class Coordinator: ObservableObject {
 
     func navigateToArtistDetail(artistId: Int) {
         push(.artistDetail(artistId: artistId))
-    }
-
-    func navigateToHome() {
-        push(.home)
-    }
-
-    func navigateToFavorites() {
-        push(.favorites)
     }
 }

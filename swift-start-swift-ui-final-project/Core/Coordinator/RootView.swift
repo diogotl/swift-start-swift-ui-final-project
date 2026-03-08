@@ -9,8 +9,12 @@ import SwiftUI
 
 struct RootView: View {
     @StateObject private var coordinator = Coordinator()
+    @StateObject private var favoritesStore = FavoritesStore()
     @State private var showSplash = true
-    private let factory = ViewFactory.makeDefault()
+
+    private var factory: ViewFactory {
+        ViewFactory.makeDefault(favoritesStore: favoritesStore)
+    }
 
     var body: some View {
         ZStack {
@@ -27,6 +31,7 @@ struct RootView: View {
             }
         }
         .environmentObject(coordinator)
+        .environmentObject(favoritesStore)
         .task {
             try? await Task.sleep(nanoseconds: 2_000_000_000)
             withAnimation {
@@ -38,12 +43,6 @@ struct RootView: View {
     @ViewBuilder
     private func destinationView(for route: Route) -> some View {
         switch route {
-        case .home:
-            factory.homeViewFactory.makeHomeView()
-
-        case .favorites:
-            factory.favoriteViewFactory.makeFavoriteView()
-
         case .artworkDetail(let artworkId):
             factory.artworkDetailViewFactory.makeArtworkDetailView(artworkId: artworkId)
 
