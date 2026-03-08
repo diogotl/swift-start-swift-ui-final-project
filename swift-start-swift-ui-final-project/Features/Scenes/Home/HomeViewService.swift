@@ -15,31 +15,41 @@ final class HomeViewService {
         self.apiClient = apiClient
     }
 
-    func fetchItems(searchQuery: String = "") async throws -> [Artwork] {
+    func fetchItems(searchQuery: String = "", page: Int = 1, limit: Int = 12) async throws -> (
+        artworks: [Artwork], hasNextPage: Bool
+    ) {
         let path: String
-        var queryItems: [URLQueryItem]? = nil
+        var queryItems: [URLQueryItem] = []
 
         if !searchQuery.isEmpty {
             path = "artworks/search"
-            queryItems = [URLQueryItem(name: "q", value: searchQuery)]
+            queryItems.append(URLQueryItem(name: "q", value: searchQuery))
         } else {
             path = "artworks"
         }
 
-        let fieldsParam = URLQueryItem(
-            name: "fields", value: "id,title,artist_title,date_display,image_id,thumbnail")
+        queryItems.append(URLQueryItem(name: "page", value: String(page)))
+        queryItems.append(URLQueryItem(name: "limit", value: String(limit)))
 
-        if queryItems != nil {
-            queryItems?.append(fieldsParam)
-        } else {
-            queryItems = [fieldsParam]
-        }
+        queryItems.append(
+            URLQueryItem(
+                name: "fields",
+                value:
+                    "id,title,artist_title,date_display,place_of_origin,image_id,artwork_type_title,thumbnail"
+            ))
 
         let endpoint = Endpoint(path: path, queryItems: queryItems)
 
-        print("endpoint", endpoint)
-
         let response: ArtworkListResponse = try await apiClient.request(endpoint)
-        return response.data.toDomain()
+        let artworks = response.data.toDomain()
+
+        let hasNextPage: Bool
+        if let pagination = response.pagination {
+            hasNextPage = pagination.currentPage < pagination.totalPages
+        } else {
+            hasNextPage = artworks.count == limit
+        }
+
+        return (artworks, hasNextPage)
     }
 }
