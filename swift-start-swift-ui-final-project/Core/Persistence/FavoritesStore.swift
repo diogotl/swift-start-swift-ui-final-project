@@ -10,4 +10,18 @@ import Foundation
 
 final class FavoritesStore: ObservableObject {
     @Published var favorites: Set<Int> = []
+
+    func favouriteCount() -> Int {
+        return self.favorites.count
+    }
+
+    func likeArtwork(_ id: Int) {
+        let isAlreadyLiked = favorites.contains(id)
+
+        if isAlreadyLiked {
+            favorites.remove(id)
+        } else {
+            favorites.insert(id)
+        }
+    }
 }
