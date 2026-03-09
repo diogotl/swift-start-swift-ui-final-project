@@ -27,7 +27,7 @@ struct FavoriteView: View {
                         Text("Your personal favorites")
                             .font(Typography.headingMd)
                         Text(
-                            "\(favoritesStore.favouriteCount()) favourite artworks"
+                            "\(favoritesStore.count) favourite artworks"
                         )
                         .font(Typography.bodySm)
                         .foregroundStyle(Colors.neutral500)
@@ -145,8 +145,10 @@ struct FavoriteView: View {
             }
         }
         .navigationTitle("Favorites")
-        .task {
-            await viewModel.loadFavorites()
+        .onAppear {
+            Task {
+                await viewModel.loadFavorites()
+            }
         }
     }
 }

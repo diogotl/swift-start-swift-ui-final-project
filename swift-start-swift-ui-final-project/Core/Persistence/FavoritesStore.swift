@@ -9,19 +9,35 @@ import Combine
 import Foundation
 
 final class FavoritesStore: ObservableObject {
-    @Published var favorites: Set<Int> = []
+    @Published var favorites: Set<Int>
+    var count: Int { favorites.count }
 
-    func favouriteCount() -> Int {
-        return self.favorites.count
+    init() {
+        if let data = UserDefaults.standard.data(forKey: "favorites"),
+            let decoded = try? JSONDecoder().decode([Int].self, from: data)
+        {
+            self.favorites = Set(decoded)
+        } else {
+            self.favorites = []
+        }
     }
 
-    func likeArtwork(_ id: Int) {
-        let isAlreadyLiked = favorites.contains(id)
+    func isFavorite(_ id: Int) -> Bool {
+        favorites.contains(id)
+    }
 
-        if isAlreadyLiked {
+    func toggleFavorite(_ id: Int) {
+        if favorites.contains(id) {
             favorites.remove(id)
         } else {
             favorites.insert(id)
+        }
+        save()
+    }
+
+    private func save() {
+        if let encoded = try? JSONEncoder().encode(Array(favorites)) {
+            UserDefaults.standard.set(encoded, forKey: "favorites")
         }
     }
 }

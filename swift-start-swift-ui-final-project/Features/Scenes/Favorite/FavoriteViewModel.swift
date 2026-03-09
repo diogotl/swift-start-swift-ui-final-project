@@ -21,8 +21,6 @@ final class FavoriteViewModel: ObservableObject {
     init(service: FavoriteViewService, favoritesStore: FavoritesStore) {
         self.service = service
         self.favoritesStore = favoritesStore
-
-        
     }
 
     func loadFavorites() async {
