@@ -15,23 +15,22 @@ struct MainTabView: View {
     }
 
     var body: some View {
-        HStack {
-            TabView {
-                viewFactory.homeViewFactory.makeHomeView()
-                    .tabItem {
-                        Label("Collection", systemImage: "square.grid.2x2.fill")
-                    }
-                viewFactory.favoriteViewFactory.makeFavoriteView()
-                    .tabItem {
-                        Label("Favorites", systemImage: "star.fill")
-                    }
-            }
-            .accentColor(Colors.brown500)
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-
+        TabView() {
+            viewFactory.discoverViewFactory.makeDiscoverView()
+                .tabItem {
+                    Label(String(localized: "Discover"), systemImage: "sparkles")
                 }
-            }
+
+            viewFactory.homeViewFactory.makeHomeView()
+                .tabItem {
+                    Label(String(localized: "Collection"), systemImage: "square.grid.2x2")
+                }
+
+            viewFactory.favoriteViewFactory.makeFavoriteView()
+                .tabItem {
+                    Label(String(localized: "Favourites"), systemImage: "heart")
+                }
         }
+        .accentColor(Colors.brown500)
     }
 }
