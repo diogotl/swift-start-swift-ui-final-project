@@ -26,7 +26,7 @@ final class ArtistDetailViewService {
         -> (artworks: [Artwork], hasNextPage: Bool)
     {
         let queryItems = [
-            URLQueryItem(name: "q", value: "artist_ids:\(artistId)"),
+            URLQueryItem(name: "query[term][artist_ids]", value: String(artistId)),
             URLQueryItem(name: "page", value: String(page)),
             URLQueryItem(name: "limit", value: String(limit)),
             URLQueryItem(
