@@ -13,11 +13,16 @@ import SwiftUI
 final class ArtistDetailViewModel: ObservableObject {
 
     @Published var artist: Artist?
+    @Published var artworks: [Artwork] = []
     @Published var isLoading = false
+    @Published var isLoadingArtworks = false
     @Published var errorMessage: String?
+    @Published var currentPage = 1
+    @Published var hasNextPage = false
 
     private let service: ArtistDetailViewService
     private let artistId: Int
+    private let artworksPerPage = 12
 
     init(service: ArtistDetailViewService, artistId: Int) {
         self.service = service
@@ -30,10 +35,41 @@ final class ArtistDetailViewModel: ObservableObject {
 
         do {
             artist = try await service.fetchArtist(id: artistId)
+            await loadArtworks()
         } catch {
-            errorMessage = "erro"
+            errorMessage = "Failed to load artist information"
         }
 
         isLoading = false
+    }
+
+    func loadArtworks() async {
+        isLoadingArtworks = true
+
+        do {
+            let result = try await service.fetchArtistArtworks(
+                artistId: artistId,
+                page: currentPage,
+                limit: artworksPerPage
+            )
+            artworks = result.artworks
+            hasNextPage = result.hasNextPage
+        } catch {
+            artworks = []
+            hasNextPage = false
+        }
+
+        isLoadingArtworks = false
+    }
+
+    func loadNextPage() async {
+        currentPage += 1
+        await loadArtworks()
+    }
+
+    func loadPreviousPage() async {
+        guard currentPage > 1 else { return }
+        currentPage -= 1
+        await loadArtworks()
     }
 }
