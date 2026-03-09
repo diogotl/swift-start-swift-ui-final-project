@@ -30,8 +30,14 @@ struct Artwork: Identifiable {
 
     // home init
     init(
-        id: Int, title: String, artistTitle: String?, dateDisplay: String?, imageID: String?,
-        artistIDs: [Int]? = nil
+        id: Int,
+        title: String,
+        artistTitle: String?,
+        dateDisplay: String?,
+        placeOfOrigin: String?,
+        imageID: String?,
+        artistIDs: [Int]? = nil,
+        artworkTypeTitle: String? = nil
     ) {
         self.id = id
         self.title = title
@@ -41,10 +47,10 @@ struct Artwork: Identifiable {
         self.provenanceText = nil
         self.dimensions = nil
         self.mediumDisplay = nil
-        self.placeOfOrigin = nil
+        self.placeOfOrigin = placeOfOrigin
         self.description = nil
         self.artistIDs = artistIDs
-        self.artworkTypeTitle = nil
+        self.artworkTypeTitle = artworkTypeTitle
         self.departmentTitle = nil
         self.styleTitle = nil
         self.classificationTitle = nil
@@ -94,7 +100,9 @@ struct ArtworkListDTO: Decodable {
     let title: String
     let artistTitle: String?
     let dateDisplay: String?
+    let placeOfOrigin: String?
     let imageID: String?
+    let artworkTypeTitle: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -102,6 +110,8 @@ struct ArtworkListDTO: Decodable {
         case artistTitle = "artist_title"
         case dateDisplay = "date_display"
         case imageID = "image_id"
+        case placeOfOrigin = "place_of_origin"
+        case artworkTypeTitle = "artwork_type_title"
     }
 }
 
@@ -143,7 +153,24 @@ struct ArtworkDetailDTO: Decodable {
     }
 }
 
+struct PaginationInfo: Decodable {
+    let total: Int
+    let limit: Int
+    let offset: Int
+    let totalPages: Int
+    let currentPage: Int
+
+    enum CodingKeys: String, CodingKey {
+        case total
+        case limit
+        case offset
+        case totalPages = "total_pages"
+        case currentPage = "current_page"
+    }
+}
+
 struct ArtworkListResponse: Decodable {
+    let pagination: PaginationInfo?
     let data: [ArtworkListDTO]
 }
 
@@ -159,7 +186,10 @@ extension ArtworkListDTO {
             title: title,
             artistTitle: artistTitle,
             dateDisplay: dateDisplay,
-            imageID: imageID
+            placeOfOrigin: placeOfOrigin,
+            imageID: imageID,
+            artistIDs: nil,
+            artworkTypeTitle: artworkTypeTitle
         )
     }
 }
