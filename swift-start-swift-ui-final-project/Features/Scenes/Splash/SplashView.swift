@@ -12,7 +12,7 @@ struct SplashView: View {
 
     var body: some View {
         ZStack {
-            Colors.brown200
+            Color.white
                 .ignoresSafeArea()
 
             Image("artic-logo")

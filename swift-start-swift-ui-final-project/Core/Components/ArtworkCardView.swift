@@ -19,7 +19,7 @@ struct ArtworkCardView: View {
 
                 Group {
                     if let title = artwork.artworkTypeTitle {
-                        Badge(text: title, variant: .secondary)
+                        Badge(text: title, variant: .primary)
                             .padding()
                     }
                 }
@@ -43,7 +43,7 @@ struct ArtworkCardView: View {
                         .lineLimit(1)
                     Spacer(minLength: Spacing.medium)
 
-                    Text(artwork.placeOfOrigin ?? "Portugal")
+                    Text(artwork.placeOfOrigin ?? "-")
                         .font(Typography.bodySm)
                         .foregroundStyle(Colors.neutral600)
                         .lineLimit(1)
