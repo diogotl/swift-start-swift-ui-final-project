@@ -14,8 +14,10 @@ struct ArtworkCardView: View {
         VStack(spacing: 0) {
             ZStack(alignment: .topLeading) {
                 LazyImage(imageID: artwork.imageID)
-                    .frame(height: 320)
+                    .aspectRatio(contentMode: .fill)
                     .frame(maxWidth: .infinity)
+                    .frame(height: 320)
+                    .clipped()
 
                 Group {
                     if let title = artwork.artworkTypeTitle {
@@ -25,6 +27,9 @@ struct ArtworkCardView: View {
                 }
 
             }
+            .frame(maxWidth: .infinity)
+            .frame(height: 320)
+            .clipped()
             .clipShape(
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
             )

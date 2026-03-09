@@ -46,17 +46,14 @@ struct ArtworkDetailView: View {
                         VStack(alignment: .leading, spacing: Spacing.large) {
 
                             if let imageID = artwork.imageID {
-                                ZStack {
-                                    LazyImage(imageID: imageID)
-                                        .frame(height: 400)
-                                        .clipped()
-                                        .clipShape(
-                                            RoundedRectangle(cornerRadius: 16)
-                                        )
-                                }
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 400)
-                                .padding(.horizontal, Spacing.medium)
+                                LazyImage(imageID: imageID)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(maxHeight: 400)
+                                    .clipShape(
+                                        RoundedRectangle(cornerRadius: 16)
+                                    )
+                                    .padding(.horizontal, Spacing.medium)
 
                             } else {
                                 RoundedRectangle(cornerRadius: 16)
@@ -95,6 +92,7 @@ struct ArtworkDetailView: View {
                                     .font(Typography.headingLg)
                                     .foregroundStyle(Colors.neutral900)
                                     .multilineTextAlignment(.leading)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
 
                                 if let artistTitle = artwork.artistTitle {
                                     Text(artistTitle)
@@ -200,7 +198,6 @@ struct ArtworkDetailView: View {
                 }
             }
         }
-        .navigationTitle(viewModel.artwork?.title ?? "")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
