@@ -11,6 +11,8 @@ struct ArtworkDetailView: View {
 
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: ArtworkDetailViewModel
+    @EnvironmentObject private var coordinator: Coordinator
+    @EnvironmentObject private var favoritesStore: FavoritesStore
 
     init(viewModel: ArtworkDetailViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -23,9 +25,7 @@ struct ArtworkDetailView: View {
             Group {
                 if viewModel.isLoading {
                     ProgressView()
-                }
-
-                else if let error = viewModel.errorMessage {
+                } else if let error = viewModel.errorMessage {
                     ContentUnavailableView {
                         Label(
                             "Try Again",
@@ -89,7 +89,7 @@ struct ArtworkDetailView: View {
                                     .padding(.horizontal, Spacing.medium)
                             }
 
-                            VStack(alignment: .leading, spacing: Spacing.medium) {
+                            VStack(alignment: .leading, spacing: Spacing.xsSmall) {
 
                                 Text(artwork.title)
                                     .font(Typography.headingLg)
@@ -107,52 +107,22 @@ struct ArtworkDetailView: View {
                                         .font(Typography.bodySm)
                                         .foregroundStyle(Colors.neutral600)
                                 }
+                                Spacer()
 
                                 HStack(spacing: Spacing.xSmall) {
 
                                     if let type = artwork.artworkTypeTitle {
-                                        Text(type)
-                                            .font(Typography.bodyXs)
-                                            .foregroundStyle(Colors.neutral700)
-                                            .padding(.horizontal, Spacing.small)
-                                            .padding(.vertical, 6)
-                                            .background(Colors.neutral100)
-                                            .overlay(
-                                                RoundedRectangle(
-                                                    cornerRadius: 12
-                                                )
-                                                .stroke(
-                                                    Colors.neutral300,
-                                                    lineWidth: 1
-                                                )
-                                            )
-                                            .clipShape(
-                                                RoundedRectangle(
-                                                    cornerRadius: 12
-                                                )
-                                            )
+                                        Badge(
+                                            text: type,
+                                            variant: .primary
+                                        )
                                     }
 
                                     if let department = artwork.departmentTitle {
-                                        Text(department)
-                                            .font(Typography.bodyXs)
-                                            .foregroundStyle(Colors.neutral600)
-                                            .padding(.horizontal, Spacing.small)
-                                            .padding(.vertical, 6)
-                                            .overlay(
-                                                RoundedRectangle(
-                                                    cornerRadius: 12
-                                                )
-                                                .stroke(
-                                                    Colors.neutral300,
-                                                    lineWidth: 1
-                                                )
-                                            )
-                                            .clipShape(
-                                                RoundedRectangle(
-                                                    cornerRadius: 12
-                                                )
-                                            )
+                                        Badge(
+                                            text: department,
+                                            variant: .secondary
+                                        )
                                     }
                                 }
 
@@ -171,7 +141,6 @@ struct ArtworkDetailView: View {
                                             value: dimensions
                                         )
                                     }
-
                                     if let mediumDisplay = artwork.mediumDisplay {
                                         DetailFieldItem(
                                             title: "Medium",
@@ -232,22 +201,15 @@ struct ArtworkDetailView: View {
             }
         }
         .navigationTitle(viewModel.artwork?.title ?? "")
-        .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .foregroundStyle(Colors.neutral950)
-                }
-            }
-
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
+                    if let artworkId = viewModel.artwork?.id {
+                        favoritesStore.toggleFavorite(artworkId)
+                    }
                 } label: {
-                    Image(systemName: "heart")
-                        .foregroundStyle(Colors.neutral900)
+                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+                        .foregroundStyle(isFavorite ? .red : Colors.neutral900)
                 }
             }
 
@@ -255,15 +217,30 @@ struct ArtworkDetailView: View {
                 Menu {
 
                     if let artistId = viewModel.artwork?.artistIDs?.first {
-                        NavigationLink {
-                            createArtistDetailView(for: artistId)
+                        Button {
+                            coordinator.navigateToArtistDetail(
+                                artistId: artistId
+                            )
                         } label: {
                             Label("View Artist", systemImage: "person")
                         }
                     }
 
+                    if let id = viewModel.artwork?.id {
+                        Link(
+                            destination: URL(
+                                string: "https://www.artic.edu/artworks/\(id)"
+                            )!
+                        ) {
+                            Label(
+                                "Visit Museum Page",
+                                systemImage: "arrow.up.right.square"
+                            )
+                        }
+                    }
+
                     Button {
-                        // TODO: share
+                        // TODO: tentar deep-linking
                     } label: {
                         Label("Share", systemImage: "square.and.arrow.up")
                     }
@@ -279,12 +256,8 @@ struct ArtworkDetailView: View {
         }
     }
 
-    // TODO: refactor
-    private func createArtistDetailView(for artistId: Int) -> ArtistDetailView {
-        let baseUrl = ProcessInfo.processInfo.environment["BASE_URL"] ?? ""
-        let apiClient = APIClient(baseURL: baseUrl)
-        let service = ArtistDetailViewService(apiClient: apiClient)
-        let vm = ArtistDetailViewModel(service: service, artistId: artistId)
-        return ArtistDetailView(viewModel: vm)
+    private var isFavorite: Bool {
+        guard let artworkId = viewModel.artwork?.id else { return false }
+        return favoritesStore.favorites.contains(artworkId)
     }
 }
