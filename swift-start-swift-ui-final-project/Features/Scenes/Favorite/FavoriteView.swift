@@ -24,22 +24,22 @@ struct FavoriteView: View {
             VStack(alignment: .leading, spacing: Spacing.medium) {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Your personal favorites")
+                        Text(String(localized: "favorites.header.title"))
                             .font(Typography.headingMd)
                         Text(
-                            "\(favoritesStore.count) favourite artworks"
+                            String(localized: "\(favoritesStore.count) favourite artworks")
                         )
                         .font(Typography.bodySm)
                         .foregroundStyle(Colors.neutral500)
                     }
                     Spacer()
                 }
-                .padding(.horizontal)
-                .padding(.top)
-                .padding(.bottom, 12)
+                .padding(.horizontal, Spacing.medium)
+                .padding(.top, Spacing.medium)
+                .padding(.bottom, Spacing.small)
 
-                ZStack {
-                    if viewModel.isLoading {
+                if viewModel.isLoading {
+                    VStack {
                         Spacer()
                         ProgressView()
                             .progressViewStyle(
@@ -48,103 +48,107 @@ struct FavoriteView: View {
                                 )
                             )
                         Spacer()
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                    } else if let error = viewModel.errorMessage {
+                } else if let error = viewModel.errorMessage {
+                    VStack {
                         Spacer()
                         ContentUnavailableView {
                             Label(
-                                "Error",
+                                String(localized: "common.error"),
                                 systemImage: "exclamationmark.triangle"
                             )
                         } description: {
                             Text(error).multilineTextAlignment(.center)
                         } actions: {
-                            Button("Try Again") {
+                            Button(String(localized: "common.try_again")) {
                                 Task { await viewModel.loadFavorites() }
                             }
                             .buttonStyle(.borderedProminent)
                         }
                         Spacer()
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                    } else if viewModel.artworks.isEmpty {
+                } else if viewModel.artworks.isEmpty {
+                    VStack {
                         Spacer()
                         ContentUnavailableView {
-                            Label("No favorites yet", systemImage: "heart")
+                            Label(String(localized: "favorites.empty.title"), systemImage: "heart")
                         } description: {
                             Text(
-                                "Start exploring the collection and save artworks you love by tapping the heart icon on any artwork."
+                                String(localized: "favorites.empty.description")
                             )
                         }
                         Spacer()
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                    } else {
-                        ScrollView {
-                            LazyVStack(spacing: Spacing.medium) {
-                                ForEach(viewModel.artworks) { artwork in
-                                    Button {
-                                        coordinator.navigateToArtworkDetail(
-                                            artworkId: artwork.id
+                } else {
+                    List {
+                        ForEach(viewModel.artworks) { artwork in
+                            Button {
+                                coordinator.navigateToArtworkDetail(
+                                    artworkId: artwork.id
+                                )
+                            } label: {
+                                HStack(spacing: Spacing.small) {
+                                    LazyImage(imageID: artwork.imageID)
+                                        .frame(width: 60, height: 60)
+                                        .clipShape(
+                                            RoundedRectangle(
+                                                cornerRadius: Spacing.xSmall,
+                                                style: .continuous
+                                            )
                                         )
-                                    } label: {
-                                        HStack(spacing: Spacing.small) {
-                                            LazyImage(imageID: artwork.imageID)
-                                                .frame(width: 80, height: 80)
-                                                .clipShape(
-                                                    RoundedRectangle(
-                                                        cornerRadius: Spacing
-                                                            .medium,
-                                                        style: .continuous
-                                                    )
-                                                )
 
-                                            VStack(
-                                                alignment: .leading,
-                                                spacing: Spacing.xsSmall
-                                            ) {
-                                                Text(artwork.title)
-                                                    .font(Typography.bodyMd)
-                                                    .foregroundStyle(
-                                                        Colors.neutral900
-                                                    )
-                                                    .lineLimit(1)
+                                    VStack(alignment: .leading, spacing: Spacing.xsSmall) {
+                                        Text(artwork.title)
+                                            .font(.body)
+                                            .foregroundStyle(.primary)
+                                            .lineLimit(1)
 
-                                                Text(
-                                                    artwork.artistTitle
-                                                        ?? "Artist"
-                                                )
-                                                .font(Typography.bodySm)
-                                                .foregroundStyle(
-                                                    Colors.neutral500
-                                                )
-                                                .lineLimit(1)
-                                            }
-
-                                            Spacer()
-
-                                            Image(systemName: "chevron.right")
-                                                .font(
-                                                    .system(
-                                                        size: 12,
-                                                        weight: .semibold
-                                                    )
-                                                )
-                                                .foregroundStyle(
-                                                    Colors.neutral400
-                                                )
-                                        }
-                                        .padding(Spacing.medium)
-                                        .background(Colors.neutral50)
+                                        Text(
+                                            artwork.artistTitle ?? "Artist"
+                                        )
+                                        .font(.subheadline)
+                                        .foregroundStyle(.secondary)
+                                        .lineLimit(1)
                                     }
-                                    .buttonStyle(PlainButtonStyle())
+
+                                    Spacer()
+
+                                    Button {
+                                        withAnimation {
+                                            favoritesStore.toggleFavorite(artwork.id)
+                                            viewModel.artworks.removeAll { $0.id == artwork.id }
+                                        }
+                                    } label: {
+                                        Image(systemName: "heart.fill")
+                                            .foregroundStyle(.red)
+                                            .font(.system(size: 20))
+                                    }
+                                    .buttonStyle(.plain)
                                 }
                             }
-                            .padding(.horizontal, Spacing.medium)
+                            .swipeActions(edge: .trailing) {
+                                Button(role: .destructive) {
+                                    favoritesStore.toggleFavorite(artwork.id)
+                                    viewModel.artworks.removeAll {
+                                        $0.id == artwork.id
+                                    }
+                                }
+                            }
                         }
+
                     }
+                    .scrollContentBackground(.hidden)
+                    .background(Colors.neutral50)
                 }
             }
         }
-        .navigationTitle("Favorites")
+        .navigationTitle(String(localized: "favorites.navigation.title"))
         .onAppear {
             Task {
                 await viewModel.loadFavorites()
