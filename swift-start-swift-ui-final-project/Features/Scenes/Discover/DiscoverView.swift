@@ -4,39 +4,34 @@
 //
 //  Created by Diogo on 08/03/2026.
 //
-
 import SwiftUI
 
 struct DiscoverView: View {
     @StateObject private var viewModel: DiscoverViewModel
     @EnvironmentObject private var coordinator: Coordinator
-
     init(viewModel: DiscoverViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-
     var body: some View {
         ZStack {
             Colors.neutral50
                 .ignoresSafeArea()
-
             VStack(alignment: .leading, spacing: Spacing.medium) {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Discover Exhibitions")
+                        Text(String(localized: "discover.header.title"))
                             .font(Typography.headingMd)
                         Text(
-                            "Explore current and past exhibitions from the Art Institute of Chicago"
+                            String(localized: "discover.header.subtitle")
                         )
                         .font(Typography.bodySm)
                         .foregroundStyle(Colors.neutral500)
                     }
                     Spacer()
                 }
-                .padding(.horizontal)
-                .padding(.top)
-                .padding(.bottom, 12)
-
+                .padding(.horizontal, Spacing.medium)
+                .padding(.top, Spacing.medium)
+                .padding(.bottom, Spacing.small)
                 if viewModel.isLoading {
                     Spacer()
                     ProgressView()
@@ -48,13 +43,13 @@ struct DiscoverView: View {
                     Spacer()
                     ContentUnavailableView {
                         Label(
-                            "Error",
+                            String(localized: "common.error"),
                             systemImage: "exclamationmark.triangle"
                         )
                     } description: {
                         Text(error).multilineTextAlignment(.center)
                     } actions: {
-                        Button("Try Again") {
+                        Button(String(localized: "common.try_again")) {
                             Task { await viewModel.loadExhibitions() }
                         }
                         .buttonStyle(.borderedProminent)
@@ -63,9 +58,11 @@ struct DiscoverView: View {
                 } else if viewModel.exhibitions.isEmpty {
                     Spacer()
                     ContentUnavailableView {
-                        Label("No Exhibitions", systemImage: "building.columns")
+                        Label(
+                            String(localized: "discover.empty.title"),
+                            systemImage: "building.columns")
                     } description: {
-                        Text("No exhibitions")
+                        Text(String(localized: "discover.empty.description"))
                     }
                     Spacer()
                 } else {

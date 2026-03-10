@@ -30,14 +30,14 @@ struct ArtistDetailView: View {
                 } else if let error = viewModel.errorMessage {
                     ContentUnavailableView {
                         Label(
-                            "Unable to Load Artist",
+                            String(localized: "artist.detail.unable_to_load"),
                             systemImage: "exclamationmark.triangle"
                         )
                     } description: {
                         Text(error)
                             .multilineTextAlignment(.center)
                     } actions: {
-                        Button("Try Again") {
+                        Button(String(localized: "common.try_again")) {
                             Task { await viewModel.load() }
                         }
                         .buttonStyle(.borderedProminent)
@@ -46,7 +46,8 @@ struct ArtistDetailView: View {
                 } else if let artist = viewModel.artist {
                     ScrollView {
                         VStack(alignment: .leading, spacing: Spacing.large) {
-                            VStack(alignment: .leading, spacing: Spacing.small) {
+                            VStack(alignment: .leading, spacing: Spacing.small)
+                            {
                                 Text(artist.name)
                                     .font(Typography.headingLg)
                                     .foregroundStyle(Colors.neutral900)
@@ -73,12 +74,17 @@ struct ArtistDetailView: View {
 
                                 if artist.isArtist {
                                     HStack(spacing: Spacing.xSmall) {
-                                        Text("Artist")
-                                            .font(Typography.bodyXs)
+                                        Text(
+                                            String(
+                                                localized:
+                                                    "artist.detail.artist_badge"
+                                            )
+                                        )
+                                        .font(Typography.bodyXs)
                                     }
                                     .foregroundStyle(Colors.brown500)
                                     .padding(.horizontal, Spacing.small)
-                                    .padding(.vertical, 6)
+                                    .padding(.vertical, Spacing.xsSmall)
                                     .background(Colors.neutral50)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 12)
@@ -98,18 +104,26 @@ struct ArtistDetailView: View {
                                 .background(Colors.neutral200)
                                 .padding(.horizontal, Spacing.medium)
 
-                            VStack(alignment: .leading, spacing: Spacing.medium) {
+                            VStack(alignment: .leading, spacing: Spacing.medium)
+                            {
                                 HStack(spacing: Spacing.xSmall) {
 
-                                    Text("Biography")
-                                        .font(Typography.headingMd)
-                                        .foregroundStyle(Colors.neutral900)
+                                    Text(
+                                        String(
+                                            localized: "artist.detail.biography"
+                                        )
+                                    )
+                                    .font(Typography.headingMd)
+                                    .foregroundStyle(Colors.neutral900)
                                 }
 
                                 if let bio = artist.bio, !bio.isEmpty {
                                     let bioText = bio.stripHTML()
 
-                                    VStack(alignment: .leading, spacing: 8) {
+                                    VStack(
+                                        alignment: .leading,
+                                        spacing: Spacing.xSmall
+                                    ) {
                                         Text(bioText)
                                             .font(Typography.bodySm)
                                             .foregroundStyle(Colors.neutral700)
@@ -125,11 +139,18 @@ struct ArtistDetailView: View {
                                                     isBioOpen.toggle()
                                                 }
                                             } label: {
-                                                HStack(spacing: 6) {
+                                                HStack(spacing: Spacing.xsSmall)
+                                                {
                                                     Text(
                                                         isBioOpen
-                                                            ? "Fechar..."
-                                                            : "Read more..."
+                                                            ? String(
+                                                                localized:
+                                                                    "common.close"
+                                                            )
+                                                            : String(
+                                                                localized:
+                                                                    "common.read_more"
+                                                            )
                                                     )
                                                     .font(Typography.headingXs)
                                                     .foregroundStyle(
@@ -142,7 +163,12 @@ struct ArtistDetailView: View {
                                     }
 
                                 } else {
-                                    Text("Sem biografia")
+                                    Text(
+                                        String(
+                                            localized:
+                                                "artist.detail.no_biography"
+                                        )
+                                    )
                                 }
                             }
                             .padding(.horizontal, Spacing.medium)
@@ -151,18 +177,26 @@ struct ArtistDetailView: View {
                                 .background(Colors.neutral200)
                                 .padding(.horizontal, Spacing.medium)
 
-                            VStack(alignment: .leading, spacing: Spacing.medium) {
-                                Text("Artworks by \(artist.name)")
-                                    .font(Typography.headingMd)
-                                    .foregroundStyle(Colors.neutral900)
-                                    .padding(.horizontal, Spacing.medium)
+                            VStack(alignment: .leading, spacing: Spacing.medium)
+                            {
+                                Text(
+                                    String(
+                                        localized:
+                                            "artist.detail.artworks_by \(artist.name)"
+                                    )
+                                )
+                                .font(Typography.headingMd)
+                                .foregroundStyle(Colors.neutral900)
+                                .padding(.horizontal, Spacing.medium)
 
                                 if viewModel.isLoadingArtworks {
                                     HStack {
                                         Spacer()
                                         ProgressView()
                                             .progressViewStyle(
-                                                CircularProgressViewStyle(tint: Colors.neutral600)
+                                                CircularProgressViewStyle(
+                                                    tint: Colors.neutral600
+                                                )
                                             )
                                             .padding(.vertical, Spacing.large)
                                         Spacer()
@@ -173,8 +207,11 @@ struct ArtistDetailView: View {
                                             ForEach(viewModel.artworks) {
                                                 artwork in
                                                 Button {
-                                                    coordinator.navigateToArtworkDetail(
-                                                        artworkId: artwork.id)
+                                                    coordinator
+                                                        .navigateToArtworkDetail(
+                                                            artworkId: artwork
+                                                                .id
+                                                        )
                                                 } label: {
                                                     ArtworkCardView(
                                                         artwork: artwork
@@ -188,64 +225,119 @@ struct ArtistDetailView: View {
                                         HStack(spacing: Spacing.xSmall) {
                                             Button {
                                                 Task {
-                                                    await viewModel.loadPreviousPage()
+                                                    await viewModel
+                                                        .loadPreviousPage()
                                                 }
                                             } label: {
-                                                HStack(spacing: 4) {
-                                                    Image(systemName: "chevron.left")
-                                                        .font(.system(size: 12, weight: .medium))
-                                                    Text("Previous")
-                                                        .font(Typography.bodySm)
+                                                HStack(spacing: Spacing.xsSmall)
+                                                {
+                                                    Image(
+                                                        systemName:
+                                                            "chevron.left"
+                                                    )
+                                                    Text(
+                                                        String(
+                                                            localized:
+                                                                "common.previous"
+                                                        )
+                                                    )
+                                                    .font(Typography.button)
                                                 }
                                                 .foregroundStyle(
                                                     viewModel.currentPage > 1
-                                                        ? Colors.neutral900 : Colors.neutral400
+                                                        ? Colors.neutral900
+                                                        : Colors.neutral400
                                                 )
-                                                .padding(.horizontal, Spacing.medium)
-                                                .padding(.vertical, Spacing.xSmall)
+                                                .padding(
+                                                    .horizontal,
+                                                    Spacing.medium
+                                                )
+                                                .padding(
+                                                    .vertical,
+                                                    Spacing.xSmall
+                                                )
                                                 .background(Colors.neutral50)
-                                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                                .clipShape(
+                                                    RoundedRectangle(
+                                                        cornerRadius: 8
+                                                    )
+                                                )
                                                 .overlay(
-                                                    RoundedRectangle(cornerRadius: 8)
-                                                        .stroke(Colors.neutral200, lineWidth: 1)
+                                                    RoundedRectangle(
+                                                        cornerRadius: 8
+                                                    )
+                                                    .stroke(
+                                                        Colors.neutral200,
+                                                        lineWidth: 1
+                                                    )
                                                 )
                                             }
                                             .disabled(
                                                 viewModel.currentPage <= 1
-                                                    || viewModel.isLoadingArtworks
+                                                    || viewModel
+                                                        .isLoadingArtworks
                                             )
-                                            .opacity(viewModel.currentPage <= 1 ? 0.5 : 1)
+                                            .opacity(
+                                                viewModel.currentPage <= 1
+                                                    ? 0.5 : 1
+                                            )
 
-                                        
                                             Button {
                                                 Task {
                                                     await viewModel.loadNextPage()
                                                 }
                                             } label: {
-                                                HStack(spacing: 4) {
-                                                    Text("Next")
-                                                        .font(Typography.bodySm)
-                                                    Image(systemName: "chevron.right")
-                                                        .font(.system(size: 12, weight: .medium))
+                                                HStack(spacing: Spacing.xsSmall)
+                                                {
+                                                    Text(
+                                                        String(
+                                                            localized:
+                                                                "common.next"
+                                                        )
+                                                    )
+                                                    .font(Typography.button)
+                                                    Image(
+                                                        systemName:
+                                                            "chevron.right"
+                                                    )
                                                 }
                                                 .foregroundStyle(
                                                     viewModel.hasNextPage
-                                                        ? Colors.neutral900 : Colors.neutral400
+                                                        ? Colors.neutral900
+                                                        : Colors.neutral400
                                                 )
-                                                .padding(.horizontal, Spacing.medium)
-                                                .padding(.vertical, Spacing.xSmall)
+                                                .padding(
+                                                    .horizontal,
+                                                    Spacing.medium
+                                                )
+                                                .padding(
+                                                    .vertical,
+                                                    Spacing.xSmall
+                                                )
                                                 .background(Colors.neutral50)
-                                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                                .clipShape(
+                                                    RoundedRectangle(
+                                                        cornerRadius: 8
+                                                    )
+                                                )
                                                 .overlay(
-                                                    RoundedRectangle(cornerRadius: 8)
-                                                        .stroke(Colors.neutral200, lineWidth: 1)
+                                                    RoundedRectangle(
+                                                        cornerRadius: 8
+                                                    )
+                                                    .stroke(
+                                                        Colors.neutral200,
+                                                        lineWidth: 1
+                                                    )
                                                 )
                                             }
                                             .disabled(
                                                 !viewModel.hasNextPage
-                                                    || viewModel.isLoadingArtworks
+                                                    || viewModel
+                                                        .isLoadingArtworks
                                             )
-                                            .opacity(!viewModel.hasNextPage ? 0.5 : 1)
+                                            .opacity(
+                                                !viewModel.hasNextPage ? 0.5 : 1
+                                            )
                                         }
                                         .padding(.horizontal, Spacing.medium)
                                         .padding(.vertical, Spacing.small)
@@ -258,7 +350,7 @@ struct ArtistDetailView: View {
                     }
 
                 } else {
-                    Text("error")
+                    Text(String(localized: "common.error"))
                 }
             }
         }

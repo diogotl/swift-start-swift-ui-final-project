@@ -15,20 +15,20 @@ struct MainTabView: View {
     }
 
     var body: some View {
-        TabView() {
+        TabView {
             viewFactory.discoverViewFactory.makeDiscoverView()
                 .tabItem {
-                    Label(String(localized: "Discover"), systemImage: "sparkles")
+                    Label(String(localized: "tab.discover"), systemImage: "sparkles")
                 }
 
             viewFactory.homeViewFactory.makeHomeView()
                 .tabItem {
-                    Label(String(localized: "Collection"), systemImage: "square.grid.2x2")
+                    Label(String(localized: "tab.collection"), systemImage: "square.grid.2x2")
                 }
 
             viewFactory.favoriteViewFactory.makeFavoriteView()
                 .tabItem {
-                    Label(String(localized: "Favourites"), systemImage: "heart")
+                    Label(String(localized: "tab.favourites"), systemImage: "heart")
                 }
         }
         .accentColor(Colors.brown500)

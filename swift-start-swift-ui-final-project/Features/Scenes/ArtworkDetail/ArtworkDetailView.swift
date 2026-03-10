@@ -28,12 +28,12 @@ struct ArtworkDetailView: View {
                 } else if let error = viewModel.errorMessage {
                     ContentUnavailableView {
                         Label(
-                            "Try Again",
+                            String(localized: "common.error"),
                             systemImage: "exclamationmark.triangle"
                         )
                     } description: {
                         Text(
-                            "erro...."
+                            String(localized: "common.error.description")
                         )
                     } actions: {
                         // TODO: try again
@@ -75,7 +75,7 @@ struct ArtworkDetailView: View {
                                                     Colors.neutral400
                                                 )
 
-                                            Text("no image")
+                                            Text(String(localized: "artwork.detail.no_image"))
                                                 .font(Typography.bodySm)
                                                 .foregroundStyle(
                                                     Colors.neutral500
@@ -135,27 +135,27 @@ struct ArtworkDetailView: View {
 
                                     if let dimensions = artwork.dimensions {
                                         DetailFieldItem(
-                                            title: "Dimensions",
+                                            title: String(localized: "artwork.detail.dimensions"),
                                             value: dimensions
                                         )
                                     }
                                     if let mediumDisplay = artwork.mediumDisplay {
                                         DetailFieldItem(
-                                            title: "Medium",
+                                            title: String(localized: "artwork.detail.medium"),
                                             value: mediumDisplay
                                         )
                                     }
 
                                     if let origin = artwork.placeOfOrigin {
                                         DetailFieldItem(
-                                            title: "Origin",
+                                            title: String(localized: "artwork.detail.origin"),
                                             value: origin
                                         )
                                     }
 
                                     if let style = artwork.styleTitle {
                                         DetailFieldItem(
-                                            title: "Style",
+                                            title: String(localized: "artwork.detail.style"),
                                             value: style
                                         )
                                     }
@@ -164,21 +164,22 @@ struct ArtworkDetailView: View {
                                         .classificationTitle
                                     {
                                         DetailFieldItem(
-                                            title: "Classification",
+                                            title: String(
+                                                localized: "artwork.detail.classification"),
                                             value: classification
                                         )
                                     }
 
                                     if let description = artwork.description {
                                         DetailFieldItem(
-                                            title: "Description",
+                                            title: String(localized: "artwork.detail.description"),
                                             value: description.stripHTML()
                                         )
                                     }
 
                                     if let provenance = artwork.provenanceText {
                                         DetailFieldItem(
-                                            title: "Provenance",
+                                            title: String(localized: "artwork.detail.provenance"),
                                             value: provenance.stripHTML()
                                         )
                                     }
@@ -193,7 +194,7 @@ struct ArtworkDetailView: View {
                 }
 
                 else {
-                    Text("no data")
+                    Text(String(localized: "artwork.detail.no_data"))
                         .foregroundStyle(Colors.neutral500)
                 }
             }
@@ -219,7 +220,9 @@ struct ArtworkDetailView: View {
                                 artistId: artistId
                             )
                         } label: {
-                            Label("View Artist", systemImage: "person")
+                            Label(
+                                String(localized: "artwork.detail.view_artist"),
+                                systemImage: "person")
                         }
                     }
 
@@ -230,7 +233,7 @@ struct ArtworkDetailView: View {
                             )!
                         ) {
                             Label(
-                                "Visit Museum Page",
+                                String(localized: "artwork.detail.visit_museum"),
                                 systemImage: "arrow.up.right.square"
                             )
                         }
@@ -239,7 +242,7 @@ struct ArtworkDetailView: View {
                     Button {
                         // TODO: tentar deep-linking
                     } label: {
-                        Label("Share", systemImage: "square.and.arrow.up")
+                        Label(String(localized: "common.share"), systemImage: "square.and.arrow.up")
                     }
 
                 } label: {

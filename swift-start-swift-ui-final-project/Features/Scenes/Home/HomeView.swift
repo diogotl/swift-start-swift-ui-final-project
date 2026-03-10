@@ -29,63 +29,64 @@ struct HomeView: View {
                     VStack(spacing: 0) {
 
                         HStack {
-                            Text("Explore the collection")
+                            Text(String(localized: "home.header.title"))
                                 .font(Typography.headingMd)
                             Spacer()
                         }
-                        .padding(.horizontal)
-                        .padding(.top)
-                        .padding(.bottom, 12)
+                        .padding(.horizontal, Spacing.medium)
+                        .padding(.top, Spacing.medium)
+                        .padding(.bottom, Spacing.small)
 
-                            HStack(spacing: 8) {
-                                ZStack(alignment: .leading) {
-                                    HStack {
-                                        Image(systemName: "magnifyingglass")
+                        HStack(spacing: Spacing.xSmall) {
+                            ZStack(alignment: .leading) {
+                                HStack {
+                                    Image(systemName: "magnifyingglass")
+                                        .foregroundStyle(Colors.neutral400)
+
+                                    TextField(
+                                        String(localized: "home.search.placeholder"),
+                                        text: $viewModel.searchByTitleQuery
+                                    )
+                                    .foregroundStyle(Colors.neutral950)
+
+                                    if !viewModel.searchByTitleQuery.isEmpty {
+                                        Button {
+                                            viewModel.searchByTitleQuery = ""
+                                        } label: {
+                                            Image(
+                                                systemName: "xmark.circle.fill"
+                                            )
                                             .foregroundStyle(Colors.neutral400)
-
-                                        TextField(
-                                            "Search by artworks...",
-                                            text: $viewModel.searchByTitleQuery
-                                        )
-                                        .foregroundStyle(Colors.neutral950)
-
-                                        if !viewModel.searchByTitleQuery.isEmpty {
-                                            Button {
-                                                viewModel.searchByTitleQuery = ""
-                                            } label: {
-                                                Image(
-                                                    systemName: "xmark.circle.fill"
-                                                )
-                                                .foregroundStyle(Colors.neutral400)
-                                            }
                                         }
                                     }
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 10)
-                                    .background(Colors.neutral100)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .stroke(Colors.neutral300, lineWidth: 1)
-                                    )
-                                    .cornerRadius(10)
-                                    .frame(height: 44)
                                 }
-
-                                Button("Search") {
-                                    Task {
-                                        await viewModel.searchItems()
-                                    }
-                                }
-                                .foregroundStyle(Colors.neutral100)
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 12)
-                                .background(Colors.neutral900)
+                                .padding(.horizontal, Spacing.small)
+                                .padding(.vertical, 10)
+                                .background(Colors.neutral100)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Colors.neutral300, lineWidth: 1)
+                                )
                                 .cornerRadius(10)
                                 .frame(height: 44)
-                                .disabled(viewModel.searchByTitleQuery.isEmpty)
                             }
-                            .padding(.horizontal)
-                            .padding(.bottom, 12)
+
+                            Button(String(localized: "home.search.button")) {
+                                Task {
+                                    await viewModel.searchItems()
+                                }
+                            }
+                            .foregroundStyle(Colors.neutral100)
+                            .padding(.horizontal, Spacing.medium)
+                            .padding(.vertical, Spacing.small)
+                            .background(Colors.neutral900)
+                            .cornerRadius(10)
+                            .frame(height: 44)
+                            .disabled(viewModel.searchByTitleQuery.isEmpty)
+                        }
+                        .padding(.horizontal, Spacing.medium)
+                        .padding(.bottom, Spacing.small)
+
                         ZStack {
                             ScrollView {
                                 LazyVStack(spacing: Spacing.medium) {
@@ -126,7 +127,7 @@ struct HomeView: View {
                                         }
                                     }
                                 }
-                                .padding(.horizontal, 16)
+                                .padding(.horizontal, Spacing.medium)
                             }
                             .opacity(viewModel.isLoadingList ? 0.3 : 1.0)
 
