@@ -11,27 +11,29 @@ struct RootView: View {
     @StateObject private var coordinator = Coordinator()
     @StateObject private var favoritesStore = FavoritesStore()
     @State private var showSplash = true
-
-    private var factory: ViewFactory {
-        ViewFactory.makeDefault(favoritesStore: favoritesStore)
-    }
+    @State private var factory: ViewFactory?
 
     var body: some View {
         ZStack {
             if showSplash {
                 SplashView()
                     .transition(.opacity)
-            } else {
+            } else if let factory {
                 NavigationStack(path: $coordinator.path) {
                     factory.makeMainTabView()
                         .navigationDestination(for: Route.self) { route in
-                            destinationView(for: route)
+                            destinationView(for: route, factory: factory)
                         }
                 }
             }
         }
         .environmentObject(coordinator)
         .environmentObject(favoritesStore)
+        .onAppear {
+            if factory == nil {
+                factory = ViewFactory.makeDefault(favoritesStore: favoritesStore)
+            }
+        }
         .task {
             try? await Task.sleep(nanoseconds: 1_000_000_000)
             withAnimation {
@@ -41,7 +43,7 @@ struct RootView: View {
     }
 
     @ViewBuilder
-    private func destinationView(for route: Route) -> some View {
+    private func destinationView(for route: Route, factory: ViewFactory) -> some View {
         switch route {
         case .artworkDetail(let artworkId):
             factory.artworkDetailViewFactory.makeArtworkDetailView(artworkId: artworkId)

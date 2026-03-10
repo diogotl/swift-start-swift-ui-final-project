@@ -25,7 +25,8 @@ final class ViewFactory {
     }
 
     static func makeDefault(favoritesStore: FavoritesStore) -> ViewFactory {
-        let baseUrl = ProcessInfo.processInfo.environment["BASE_URL"] ?? ""
+        let baseUrl =
+            ProcessInfo.processInfo.environment["BASE_URL"] ?? "https://api.artic.edu/api/v1/"
         let apiClient = APIClient(baseURL: baseUrl)
         return ViewFactory(apiClient: apiClient, favoritesStore: favoritesStore)
     }
