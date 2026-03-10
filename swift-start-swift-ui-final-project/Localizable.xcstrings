@@ -1,6 +1,335 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+
+    "tab.discover" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discover"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descobrir"
+          }
+        }
+      }
+    },
+    "tab.collection" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collection"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coleção"
+          }
+        }
+      }
+    },
+    "tab.favourites" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favourites"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoritos"
+          }
+        }
+      }
+    },
+
+
+    "common.error" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro"
+          }
+        }
+      }
+    },
+    "common.error.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Something went wrong. Please try again."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algo correu mal. Por favor, tente novamente."
+          }
+        }
+      }
+    },
+    "common.try_again" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try Again"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tentar novamente"
+          }
+        }
+      }
+    },
+    "common.share" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partilhar"
+          }
+        }
+      }
+    },
+    "common.close" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fechar"
+          }
+        }
+      }
+    },
+    "common.read_more" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read more..."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ler mais..."
+          }
+        }
+      }
+    },
+    "common.previous" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anterior"
+          }
+        }
+      }
+    },
+    "common.next" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguinte"
+          }
+        }
+      }
+    },
+
+
+    "home.header.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explore the collection"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explorar a coleção"
+          }
+        }
+      }
+    },
+    "home.search.placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search by artworks..."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pesquisar obras..."
+          }
+        }
+      }
+    },
+    "home.search.button" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pesquisar"
+          }
+        }
+      }
+    },
+
+
+    "discover.header.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discover Exhibitions"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exposições"
+          }
+        }
+      }
+    },
+    "discover.header.subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explore current and past exhibitions from the Art Institute of Chicago"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explore as exposições passadas e presentes do Art Institute of Chicago"
+          }
+        }
+      }
+    },
+    "discover.empty.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Exhibitions"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sem Exposições"
+          }
+        }
+      }
+    },
+    "discover.empty.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No exhibitions available at the moment."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhuma exposição disponível no momento."
+          }
+        }
+      }
+    },
+
+
+    "favorites.navigation.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorites"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoritos"
+          }
+        }
+      }
+    },
+    "favorites.header.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your personal favourites"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Os seus favoritos"
+          }
+        }
+      }
+    },
     "%lld favourite artworks" : {
       "localizations" : {
         "en" : {
@@ -41,274 +370,14 @@
         }
       }
     },
-    "Artist" : {
+    "favorites.empty.title" : {
       "localizations" : {
-        "pt-PT" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Artista"
+            "value" : "No favourites yet"
           }
-        }
-      }
-    },
-    "Artworks by %@" : {
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obras de %@"
-          }
-        }
-      }
-    },
-    "Biography" : {
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Biografia"
-          }
-        }
-      }
-    },
-    "Classification" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Classificação"
-          }
-        }
-      }
-    },
-    "Close" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fechar"
-          }
-        }
-      }
-    },
-    "Collection" : {
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Coleção"
-          }
-        }
-      }
-    },
-    "Description" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Descrição"
-          }
-        }
-      }
-    },
-    "Dimensions" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dimensões"
-          }
-        }
-      }
-    },
-    "Discover" : {
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Descobrir"
-          }
-        }
-      }
-    },
-    "Discover Exhibitions" : {
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exposições"
-          }
-        }
-      }
-    },
-    "erro...." : {
-
-    },
-    "error" : {
-
-    },
-    "Error" : {
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erro"
-          }
-        }
-      }
-    },
-    "Explore current and past exhibitions from the Art Institute of Chicago" : {
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Explore as exposições passadas e presentes do Art Institute of Chicago"
-          }
-        }
-      }
-    },
-    "Explore the collection" : {
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Explorar a coleção"
-          }
-        }
-      }
-    },
-    "Favorites" : {
-
-    },
-    "Favourites" : {
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Favoritos"
-          }
-        }
-      }
-    },
-    "Fechar..." : {
-
-    },
-    "Image unavailable" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Imagem indisponível"
-          }
-        }
-      }
-    },
-    "logo" : {
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "logótipo"
-          }
-        }
-      }
-    },
-    "Medium" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Meio"
-          }
-        }
-      }
-    },
-    "Next" : {
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seguinte"
-          }
-        }
-      }
-    },
-    "No artwork data available" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dados da obra indisponíveis"
-          }
-        }
-      }
-    },
-    "No artworks found" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nenhuma obra encontrada"
-          }
-        }
-      }
-    },
-    "No biography available" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sem biografia disponível"
-          }
-        }
-      }
-    },
-    "no data" : {
-
-    },
-    "No exhibitions" : {
-
-    },
-    "No Exhibitions" : {
-
-    },
-    "No exhibitions available" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nenhuma exposição disponível"
-          }
-        }
-      }
-    },
-    "No exhibitions available at the moment." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nenhuma exposição disponível no momento."
-          }
-        }
-      }
-    },
-    "No favorites yet" : {
-
-    },
-    "No favourites yet" : {
-      "extractionState" : "stale",
-      "localizations" : {
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
@@ -317,12 +386,32 @@
         }
       }
     },
-    "no image" : {
-
-    },
-    "No image available" : {
-      "extractionState" : "stale",
+    "favorites.empty.description" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start exploring the collection and save artworks you love by tapping the heart icon on any artwork."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comece a explorar a coleção e guarde as obras que mais aprecia tocando no ícone de coração."
+          }
+        }
+      }
+    },
+
+
+    "artwork.detail.no_image" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No image available"
+          }
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
@@ -331,9 +420,62 @@
         }
       }
     },
-    "Origin" : {
-      "extractionState" : "stale",
+    "artwork.detail.no_data" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No artwork data available"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dados da obra indisponíveis"
+          }
+        }
+      }
+    },
+    "artwork.detail.dimensions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dimensions"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dimensões"
+          }
+        }
+      }
+    },
+    "artwork.detail.medium" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medium"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meio"
+          }
+        }
+      }
+    },
+    "artwork.detail.origin" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Origin"
+          }
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
@@ -342,41 +484,62 @@
         }
       }
     },
-    "Page %lld" : {
-      "extractionState" : "stale",
+    "artwork.detail.style" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Style"
+          }
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Página %lld"
+            "value" : "Estilo"
           }
         }
       }
     },
-    "Previous" : {
+    "artwork.detail.classification" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Classification"
+          }
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Anterior"
+            "value" : "Classificação"
           }
         }
       }
     },
-    "Print" : {
-      "extractionState" : "stale",
+    "artwork.detail.description" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Imprimir"
+            "value" : "Descrição"
           }
         }
       }
     },
-    "Provenance" : {
-      "extractionState" : "stale",
+    "artwork.detail.provenance" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Provenance"
+          }
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
@@ -385,97 +548,14 @@
         }
       }
     },
-    "Read more" : {
-      "extractionState" : "stale",
+    "artwork.detail.view_artist" : {
       "localizations" : {
-        "pt-PT" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ler mais"
+            "value" : "View Artist"
           }
-        }
-      }
-    },
-    "Read more..." : {
-
-    },
-    "Save artworks you love by tapping the heart icon." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Guarde as obras que mais aprecia tocando no ícone de coração."
-          }
-        }
-      }
-    },
-    "Search" : {
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pesquisar"
-          }
-        }
-      }
-    },
-    "Search artworks..." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pesquisar obras..."
-          }
-        }
-      }
-    },
-    "Search by artworks..." : {
-
-    },
-    "Sem biografia" : {
-
-    },
-    "Share" : {
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Partilhar"
-          }
-        }
-      }
-    },
-    "Start exploring the collection and save artworks you love by tapping the heart icon on any artwork." : {
-
-    },
-    "Try Again" : {
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tentar novamente"
-          }
-        }
-      }
-    },
-    "Unable to load artist" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não foi possível carregar o artista"
-          }
-        }
-      }
-    },
-    "Unable to Load Artist" : {
-
-    },
-    "View Artist" : {
-      "localizations" : {
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
@@ -484,8 +564,14 @@
         }
       }
     },
-    "Visit Museum Page" : {
+    "artwork.detail.visit_museum" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visit Museum Page"
+          }
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
@@ -494,20 +580,107 @@
         }
       }
     },
-    "Your personal favorites" : {
 
-    },
-    "Your personal favourites" : {
-      "extractionState" : "stale",
+
+    "artist.detail.unable_to_load" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to Load Artist"
+          }
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Os seus favoritos"
+            "value" : "Não foi possível carregar o artista"
+          }
+        }
+      }
+    },
+    "artist.detail.artist_badge" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artist"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artista"
+          }
+        }
+      }
+    },
+    "artist.detail.biography" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biography"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biografia"
+          }
+        }
+      }
+    },
+    "artist.detail.no_biography" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No biography available"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sem biografia disponível"
+          }
+        }
+      }
+    },
+    "artist.detail.artworks_by %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artworks by %@"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obras de %@"
+          }
+        }
+      }
+    },
+
+
+    "logo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "logo"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "logótipo"
           }
         }
       }
     }
+
   },
   "version" : "1.1"
 }
