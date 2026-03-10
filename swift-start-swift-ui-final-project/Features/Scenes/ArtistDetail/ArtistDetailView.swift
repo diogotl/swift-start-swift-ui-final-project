@@ -185,9 +185,7 @@ struct ArtistDetailView: View {
                                         }
                                         .padding(.horizontal, Spacing.medium)
 
-                                        // Pagination Controls
                                         HStack(spacing: Spacing.xSmall) {
-                                            // Previous
                                             Button {
                                                 Task {
                                                     await viewModel.loadPreviousPage()
@@ -218,16 +216,7 @@ struct ArtistDetailView: View {
                                             )
                                             .opacity(viewModel.currentPage <= 1 ? 0.5 : 1)
 
-                                            Spacer()
-
-                                            // Page indicator
-                                            Text("Page \(viewModel.currentPage)")
-                                                .font(Typography.bodySm)
-                                                .foregroundStyle(Colors.neutral600)
-
-                                            Spacer()
-
-                                            // Next
+                                        
                                             Button {
                                                 Task {
                                                     await viewModel.loadNextPage()

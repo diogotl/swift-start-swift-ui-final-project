@@ -23,7 +23,6 @@ struct Exhibition: Identifiable {
     }
 }
 
-// MARK: - DTO
 struct ExhibitionDTO: Decodable {
     let id: Int
     let title: String
@@ -58,7 +57,6 @@ extension Array where Element == ExhibitionDTO {
     }
 }
 
-// MARK: - Response
 struct ExhibitionListResponse: Decodable {
     let data: [ExhibitionDTO]
 }

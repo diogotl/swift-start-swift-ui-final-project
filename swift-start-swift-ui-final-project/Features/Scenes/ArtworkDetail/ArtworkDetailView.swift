@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ArtworkDetailView: View {
 
-    @Environment(\.dismiss) private var dismiss
+    // @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: ArtworkDetailViewModel
     @EnvironmentObject private var coordinator: Coordinator
     @EnvironmentObject private var favoritesStore: FavoritesStore
