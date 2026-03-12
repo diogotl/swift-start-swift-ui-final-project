@@ -9,5 +9,7 @@ import Foundation
 
 protocol ArtistRepositoryProtocol {
     func fetchArtist(id: Int) async throws -> Artist
-    func fetchArtistArtworks(artistId: Int, page: Int, limit: Int) async throws -> [Artwork]
+    func fetchArtistArtworks(artistId: Int, page: Int, limit: Int) async throws -> (
+        artworks: [Artwork], hasNextPage: Bool
+    )
 }
