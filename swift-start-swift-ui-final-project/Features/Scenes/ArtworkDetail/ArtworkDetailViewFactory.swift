@@ -16,9 +16,9 @@ final class ArtworkDetailViewFactory {
     }
 
     func makeArtworkDetailView(artworkId: Int) -> ArtworkDetailView {
-        let service = ArtworkDetailService(apiClient: apiClient)
+        let artworkRepository = ArtworkRepository(apiClient: apiClient)
         let viewModel = ArtworkDetailViewModel(
-            service: service,
+            artworkRepository: artworkRepository,
             artworkId: artworkId
         )
         return ArtworkDetailView(viewModel: viewModel)

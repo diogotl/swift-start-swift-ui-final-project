@@ -18,9 +18,9 @@ final class FavoriteViewFactory {
     }
 
     func makeFavoriteView() -> FavoriteView {
-        let service = FavoriteViewService(apiClient: apiClient)
+        let artworkRepository = ArtworkRepository(apiClient: apiClient)
         let viewModel = FavoriteViewModel(
-            service: service,
+            artworkRepository: artworkRepository,
             favoritesStore: favoritesStore
         )
         return FavoriteView(viewModel: viewModel)

@@ -5,8 +5,8 @@
 //  Created by Diogo on 01/03/2026.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 @MainActor
 final class ArtworkDetailViewModel: ObservableObject {
@@ -15,11 +15,11 @@ final class ArtworkDetailViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String?
 
-    private let service: ArtworkDetailService
+    private let artworkRepository: ArtworkRepositoryProtocol
     private let artworkId: Int
 
-    init(service: ArtworkDetailService, artworkId: Int) {
-        self.service = service
+    init(artworkRepository: ArtworkRepositoryProtocol, artworkId: Int) {
+        self.artworkRepository = artworkRepository
         self.artworkId = artworkId
     }
 
@@ -28,7 +28,7 @@ final class ArtworkDetailViewModel: ObservableObject {
         errorMessage = nil
 
         do {
-            artwork = try await service.fetchArtworkDetail(id: artworkId)
+            artwork = try await artworkRepository.fetchArtwork(id: artworkId)
         } catch {
             errorMessage = "Failed to load artwork details"
         }

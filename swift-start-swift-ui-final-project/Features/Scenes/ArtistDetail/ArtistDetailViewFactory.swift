@@ -16,9 +16,9 @@ final class ArtistDetailViewFactory {
     }
 
     func makeArtistDetailView(artistId: Int) -> ArtistDetailView {
-        let service = ArtistDetailViewService(apiClient: apiClient)
+        let artistRepository = ArtistRepository(apiClient: apiClient)
         let viewModel = ArtistDetailViewModel(
-            service: service,
+            artistRepository: artistRepository,
             artistId: artistId
         )
         return ArtistDetailView(viewModel: viewModel)

@@ -16,8 +16,8 @@ final class HomeViewFactory {
     }
 
     func makeHomeView() -> HomeView {
-        let service = HomeViewService(apiClient: apiClient)
-        let viewModel = HomeViewModel(service: service)
+        let artworkRepository = ArtworkRepository(apiClient: apiClient)
+        let viewModel = HomeViewModel(artworkRepository: artworkRepository)
         return HomeView(viewModel: viewModel)
     }
 }

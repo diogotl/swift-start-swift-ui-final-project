@@ -20,12 +20,12 @@ final class ArtistDetailViewModel: ObservableObject {
     @Published var currentPage = 1
     @Published var hasNextPage = false
 
-    private let service: ArtistDetailViewService
+    private let artistRepository: ArtistRepositoryProtocol
     private let artistId: Int
     private let artworksPerPage = 12
 
-    init(service: ArtistDetailViewService, artistId: Int) {
-        self.service = service
+    init(artistRepository: ArtistRepositoryProtocol, artistId: Int) {
+        self.artistRepository = artistRepository
         self.artistId = artistId
     }
 
@@ -34,7 +34,7 @@ final class ArtistDetailViewModel: ObservableObject {
         errorMessage = nil
 
         do {
-            artist = try await service.fetchArtist(id: artistId)
+            artist = try await artistRepository.fetchArtist(id: artistId)
             await loadArtworks()
         } catch {
             errorMessage = "Failed to load artist information"
@@ -47,7 +47,7 @@ final class ArtistDetailViewModel: ObservableObject {
         isLoadingArtworks = true
 
         do {
-            let result = try await service.fetchArtistArtworks(
+            let result = try await artistRepository.fetchArtistArtworks(
                 artistId: artistId,
                 page: currentPage,
                 limit: artworksPerPage

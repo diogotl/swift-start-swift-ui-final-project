@@ -15,11 +15,11 @@ final class FavoriteViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String?
 
-    private let service: FavoriteViewService
+    private let artworkRepository: ArtworkRepositoryProtocol
     private let favoritesStore: FavoritesStore
 
-    init(service: FavoriteViewService, favoritesStore: FavoritesStore) {
-        self.service = service
+    init(artworkRepository: ArtworkRepositoryProtocol, favoritesStore: FavoritesStore) {
+        self.artworkRepository = artworkRepository
         self.favoritesStore = favoritesStore
     }
 
@@ -35,7 +35,7 @@ final class FavoriteViewModel: ObservableObject {
         errorMessage = nil
 
         do {
-            let fetchedArtworks = try await service.fetchArtworks(ids: favoriteIds)
+            let fetchedArtworks = try await artworkRepository.fetchArtworksByIds(favoriteIds)
             artworks = fetchedArtworks
         } catch {
             errorMessage = "failed to load"

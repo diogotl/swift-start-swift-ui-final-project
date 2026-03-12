@@ -21,11 +21,11 @@ final class HomeViewModel: ObservableObject {
     @Published var currentPage = 1
     @Published var hasNextPage = true
 
-    private let service: HomeViewService
+    private let artworkRepository: ArtworkRepositoryProtocol
     private let itemsPerPage = 12
 
-    init(service: HomeViewService) {
-        self.service = service
+    init(artworkRepository: ArtworkRepositoryProtocol) {
+        self.artworkRepository = artworkRepository
     }
 
     func loadItems() async {
@@ -34,9 +34,10 @@ final class HomeViewModel: ObservableObject {
         currentPage = 1
 
         do {
-            let result = try await service.fetchItems(
+            let result = try await artworkRepository.fetchArtworks(
                 page: currentPage,
-                limit: itemsPerPage
+                limit: itemsPerPage,
+                query: nil
             )
             items = result.artworks
             hasNextPage = result.hasNextPage
@@ -53,10 +54,10 @@ final class HomeViewModel: ObservableObject {
         currentPage = 1
 
         do {
-            let result = try await service.fetchItems(
-                searchQuery: searchByTitleQuery,
+            let result = try await artworkRepository.fetchArtworks(
                 page: currentPage,
-                limit: itemsPerPage
+                limit: itemsPerPage,
+                query: searchByTitleQuery
             )
             items = result.artworks
             hasNextPage = result.hasNextPage
@@ -76,10 +77,10 @@ final class HomeViewModel: ObservableObject {
         currentPage += 1
 
         do {
-            let result = try await service.fetchItems(
-                searchQuery: searchByTitleQuery,
+            let result = try await artworkRepository.fetchArtworks(
                 page: currentPage,
-                limit: itemsPerPage
+                limit: itemsPerPage,
+                query: searchByTitleQuery
             )
             items.append(contentsOf: result.artworks)
             hasNextPage = result.hasNextPage
